@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addExperience } from '../../action/profile';
 
-const AddExperience = (props) => {
+const AddExperience = ({ addExperience, history }) => {
   const [formData, setFormData] = useState({
     company: '',
     title: '',
@@ -20,7 +20,7 @@ const AddExperience = (props) => {
   const { company, title, location, from, to, current, description } = formData;
 
   const onChange = (e) =>
-    setFormData({ ...formData, [e.targe.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   return (
     <Fragment>
@@ -30,7 +30,10 @@ const AddExperience = (props) => {
         positions that you have had in the past
       </p>
       <small>* = required field</small>
-      <form className='form'>
+      <form className='form' onSubmit={(e) => {
+        e.preventDefault();
+        addExperience(formData, history)
+      }}>
         <div className='form-group'>
           <input
             type='text'
@@ -83,7 +86,7 @@ const AddExperience = (props) => {
         </div>
         <div className='form-group'>
           <h4>To Date</h4>
-          <input type='date' name='to' value={to} onChange={(e) => onChange(e)} />
+          <input type='date' name='to' value={to} onChange={(e) => onChange(e)} disabled= { toDateDisabled ? 'disabled' : ''} />
         </div>
         <div className='form-group'>
           <textarea
