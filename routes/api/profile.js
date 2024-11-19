@@ -2,10 +2,11 @@ const express = require('express');
 const request = require('request');
 const config = require('config');
 const router = express.Router();
+const { check, validationResult } = require('express-validator');
 const auth = require('../../middleware/auth');
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
-const { check, validationResult } = require('express-validator');
+const Post = require('../../models/Post');
 
 // @route       GET api/profile/me
 // @desc        Get Current users profile
@@ -162,13 +163,20 @@ router.get('/user/:user_id', async (req, res) => {
 // @access    Private
 router.delete('/', auth, async (req, res) => {
   try {
-    // Remove Profile
-    // Remove User
 
-    await Promise.all([
-      Profile.findOneAndDelete({ user: req.user.id }),
-      User.findOneAndDelete({ _id: req.user.id }),
-    ]);
+    // Remove Users Posts
+    await Post.deleteMany({ user: req.user.id });
+
+    // Remove Profile
+    await Profile.findOneAndDelete({ user: req.user.id});
+
+    // Remove User
+    await User.findOneAndDelete({ _id: req.user.id });
+
+    // await Promise.all([
+    //   Profile.findOneAndDelete({ user: req.user.id }),
+    //   User.findOneAndDelete({ _id: req.user.id }),
+    // ]);
 
     res.json({ msg: 'User Deleted' });
   } catch (err) {
