@@ -1,6 +1,7 @@
 {
-    "mongoURI": "mongodb+srv://lucifer:lucifer@devconnector.mc2t5jl.mongodb.net/",
+    "mongoURI": "mongodb+srv://lucifer:lucifer@devconnector.mc2t5jl.mongodb.net/?retryWrites=true&w=majority&appName=DevConnector",
     "jwtSecret": "mysecrettoken",
-    "githubClientId": "",
-    "githubSecret": ""
-}
+    "githubClientID": "Ov23libo0kwRBwMCZZS6",
+    "githubSecret": "ca32a61fba48582555c592b7184be7587f7323d7"
+  }
+  
