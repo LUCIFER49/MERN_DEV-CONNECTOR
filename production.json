@@ -1,0 +1,6 @@
+{
+    "mongoURI": "mongodb+srv://lucifer:lucifer@devconnector.mc2t5jl.mongodb.net/",
+    "jwtSecret": "mysecrettoken",
+    "githubClientId": "",
+    "githubSecret": ""
+}
